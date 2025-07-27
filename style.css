@@ -1,0 +1,587 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #111;
+    color: wheat;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr auto auto auto;
+    grid-template-areas:
+        "hero hero hero hero"
+        "content spotify spotify spotify"
+        "press press press instagram-embed"
+        "press press press news"
+        "links about about copyright";
+    gap: 1.5rem;
+    padding: 0;
+    padding-top: 5.5rem; /* Add space for fixed topbar */
+}
+
+/* Hero Section */
+.hero {
+    grid-area: hero;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    /* Use a linear-gradient overlay for darkening and fading */
+    background:
+        linear-gradient(to bottom, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.75) 50%, rgba(20,20,20,1) 100%),
+        url('https://kansasreflector.com/wp-content/uploads/2023/12/GettyImages-1334136009-1536x864.jpg') center center/cover no-repeat;
+    border-radius: 12px;
+    margin-top: 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    padding: 2rem;
+}
+.hero h1 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: wheat;
+}
+.hero p {
+    font-size: 1.2rem;
+    color: #f5deb3;
+    margin: 0;
+}
+
+/* Content Section */
+.content {
+    grid-area: content;
+    background: #181818;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+/* Spotify Embed */
+#embed-spotify {
+    grid-area: spotify;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border: none;
+    border-radius: 12px;
+    background: #181818;
+    align-self: stretch;
+    justify-self: stretch;
+}
+.instagram-embed {
+    grid-area: instagram-embed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+    background: #181818;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+.instagram-embed blockquote.instagram-media {
+    background: #181818 !important;
+    color: #f5deb3 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18) !important;
+    border: none !important;
+}
+
+/* Press Section */
+.press {
+    grid-area: press;
+    background: linear-gradient(120deg, #181818 70%, #222 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    padding: 2rem 2.5rem;
+    margin-bottom: 1rem;
+    color: #f5deb3;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    position: relative;
+}
+.press::before {
+    content: "★ ";
+    display: inline;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffe6a7;
+    margin-right: 0.3em;
+    letter-spacing: 0.03em;
+}
+.press .um-link {
+    color: #ffe6a7;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.press .um-link:hover,
+.press .um-link:focus {
+    color: #f5deb3;
+    text-decoration: underline wavy;
+}
+
+/* ...existing code... */
+.press-content {
+    display: block;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s;
+    overflow: hidden;
+}
+.press-toggle {
+    display: none;
+    margin-top: 1rem;
+    background: #222;
+    color: #ffe6a7;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.press-toggle:hover,
+.press-toggle:focus {
+    background: #ffe6a7;
+    color: #222;
+}
+@media (max-width: 1200px) {
+    .press-content {
+        max-height: 6.5em;
+        opacity: 0.85;
+        position: relative;
+    }
+    .press-content.expanded {
+        max-height: 100em;
+        opacity: 1;
+    }
+    .press-toggle {
+        display: inline-block;
+    }
+    .press-content::after {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 2.5em;
+        background: linear-gradient(to bottom, rgba(24,24,24,0), #181818 90%);
+        pointer-events: none;
+        border-radius: 0 0 12px 12px;
+    }
+    .press-content.expanded::after {
+        display: none;
+    }
+}
+
+/* Instagram Embed Section */
+.instagram-embed {
+    grid-area: instagram-embed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+}
+.instagram-embed blockquote {
+    width: 100%;
+    max-width: 540px;
+}
+
+/* News Section */
+.news {
+    grid-area: news;
+    background: #181818;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    padding: 2rem 2.5rem;
+    color: #f5deb3;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+.news h3 {
+    margin-top: 0;
+    color: #ffe6a7;
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+}
+.news ul {
+    padding-left: 1.2em;
+}
+.news li {
+    margin-bottom: 0.7em;
+}
+
+/* Sidebar/Links/About/Copyright */
+.links, .about, .copyright {
+    background: #181818;
+    border-radius: 10px;
+    padding: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.links { grid-area: links; }
+.about { grid-area: about; }
+.copyright { 
+    grid-area: copyright; 
+    font-size: 0.9rem; 
+    color: #bfa; 
+}
+.copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Improved Links Section with Animated Icons and Text */
+.links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.links ul li {
+    margin-bottom: 1rem;
+}
+.links ul li:last-child {
+    margin-bottom: 0;
+}
+.links ul li a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: #222;
+    color: wheat;
+    text-decoration: none;
+    padding: 0.6em 1em;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.05em;
+    transition: 
+        background 0.25s cubic-bezier(0.4,0,0.2,1),
+        color 0.25s cubic-bezier(0.4,0,0.2,1),
+        box-shadow 0.25s cubic-bezier(0.4,0,0.2,1),
+        transform 0.18s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    position: relative;
+    overflow: hidden;
+}
+.links ul li a .icon {
+    width: 1.2em;
+    height: 1.2em;
+    min-width: 1.2em;
+    min-height: 1.2em;
+    border-radius: 4px;
+    margin-right: 0.5em;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    transition: 
+        transform 0.3s cubic-bezier(0.4,0,0.2,1),
+        filter 0.3s cubic-bezier(0.4,0,0.2,1);
+    filter: grayscale(40%) brightness(0.95);
+}
+.links ul li a span {
+    display: inline-block;
+    transition: 
+        color 0.25s cubic-bezier(0.4,0,0.2,1),
+        transform 0.25s cubic-bezier(0.4,0,0.2,1),
+        letter-spacing 0.25s cubic-bezier(0.4,0,0.2,1);
+    letter-spacing: 0.01em;
+}
+
+/* Hover/Focus Animations */
+.links ul li a:hover,
+.links ul li a:focus {
+    background: linear-gradient(90deg, #f5deb3 60%, #222 100%);
+    color: #222;
+    box-shadow: 0 4px 16px rgba(245, 222, 179, 0.18);
+    text-decoration: none;
+    transform: translateY(-2px) scale(1.03);
+}
+.links ul li a:hover .icon,
+.links ul li a:focus .icon {
+    transform: scale(1.18) rotate(-8deg);
+    filter: grayscale(0%) brightness(1.1) drop-shadow(0 2px 8px #f5deb3aa);
+}
+.links ul li a:hover span,
+.links ul li a:focus span {
+    color: #222;
+    transform: translateX(4px) scale(1.06);
+    letter-spacing: 0.08em;
+}
+
+/* Subtle icon pop-in on load */
+@keyframes iconPopIn {
+    0% { transform: scale(0.7) rotate(-10deg); opacity: 0; }
+    80% { transform: scale(1.15) rotate(6deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); }
+}
+.links ul li a .icon {
+    animation: iconPopIn 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Subtle text fade-in on load */
+@keyframes textFadeIn {
+    from { opacity: 0; transform: translateY(10px);}
+    to   { opacity: 1; transform: translateY(0);}
+}
+.links ul li a span {
+    animation: textFadeIn 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Topbar: fixed logo + nav, transparent background by default */
+/* ...existing code... */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: transparent; /* Transparent until scrolled */
+    opacity: 1;
+    transition: background 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    border-radius: 0 0 16px 16px;
+}
+
+/* Add background after scrolling past hero */
+.topbar.scrolled {
+    background: linear-gradient(90deg, #1e1e1e 60%, #f5deb3 100%);
+    animation: navFadeIn 1s cubic-bezier(0.4,0,0.2,1);
+}
+
+@keyframes navFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Hamburger Menu Navigation - Moves nav items to the left on desktop, hamburger on mobile */
+nav {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: #181818;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-right: 2rem;
+}
+.logo img {
+    height: 48px;
+    width: auto;
+}
+.logo h1 {
+    color: wheat;
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 100px;
+    padding: 0;
+    gap: 2rem;
+    width: 100%;
+}
+nav ul li a {
+    position: relative;
+    color: wheat;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+nav ul li a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    background: conic-gradient(from 180deg at 50% 50%, wheat 0%, #f5deb3 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    z-index: -1;
+}
+nav ul li a:hover,
+nav ul li a:focus {
+    color: #222;
+}
+nav ul li a:hover::before,
+nav ul li a:focus::before {
+    transform: scaleX(1);
+}
+
+/* Hamburger styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: auto;
+    z-index: 1100;
+}
+.hamburger .line {
+    width: 28px;
+    height: 3px;
+    background-color: wheat;
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+.hamburger.hamburger-active .line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.hamburger-active .line:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.hamburger-active .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile nav */
+@media (max-width: 1200px) {
+    body {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "hero hero"
+            "content spotify"
+            "press instagram-embed"
+            "news news"
+            "links about"
+            "copyright copyright";
+    }
+    .news, .instagram-embed {
+        padding: 1.2rem 1rem;
+        font-size: 1rem;
+    }
+}
+@media (max-width: 700px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "hero"
+            "content"
+            "spotify"
+            "press"
+            "instagram-embed"
+            "news"
+            "links"
+            "about"
+            "copyright";
+        gap: 1rem;
+    }
+    .news, .instagram-embed {
+        padding: 1rem 0.7rem;
+        font-size: 0.98rem;
+    }
+}
+@media (max-width: 900px) {
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        background: transparent;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+    }
+    .logo {
+        z-index: 2100;
+    }
+    .hamburger {
+        display: flex;
+        position: fixed;
+        top: 1.5rem;
+        right: 2rem;
+        margin-left: 0;
+        z-index: 2200;
+    }
+    nav ul {
+        position: fixed;
+        left: 0;
+        top: 0;
+        flex-direction: column;
+        background: #181818;
+        width: 70vw;
+        max-width: 350px;
+        height: 100vh;
+        padding-top: 6rem;
+        align-items: flex-start;
+        justify-content: flex-start; /* <-- important: start at top */
+        box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+        transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+        gap: 2rem;
+        z-index: 2100;
+        transform: translateX(-100%);
+        margin: 0;
+    }
+    nav ul.active {
+        transform: translateX(0);
+    }
+    nav ul li {
+        margin-left: 2rem;
+    }
+}
+@media (max-width: 600px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "hero"
+            "nav"
+            "content"
+            "spotify"
+            "press"
+            "instagram-embed"
+            "news"
+            "links"
+            "about"
+            "copyright";
+        gap: 1rem;
+    }
+    .topbar {
+        padding: 0.7rem 0.5rem;
+    }
+    .nav a {
+        font-size: 1rem;
+        padding: 0.4rem 0.7rem;
+    }
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero { 
+        margin-top: 0; 
+    }
+}
+@media (max-width: 900px) {
+    #embed-spotify {
+        min-height: 250px;
+    }
+}
+@media (max-width: 600px) {
+    #embed-spotify {
+        min-height: 180px;
+    }
+}
