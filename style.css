@@ -339,7 +339,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 1.2rem 2.5rem;
-    background: transparent; /* Transparent until scrolled */
+    background: black; /* Transparent until scrolled */
     opacity: 1;
     transition: background 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.7s cubic-bezier(0.4,0,0.2,1);
     box-shadow: 0 2px 16px rgba(0,0,0,0.18);
@@ -348,7 +348,7 @@ body {
 
 /* Add background after scrolling past hero */
 .topbar.scrolled {
-    background: linear-gradient(90deg, #1e1e1e 60%, #f5deb3 100%);
+    background: black;
     animation: navFadeIn 1s cubic-bezier(0.4,0,0.2,1);
 }
 
