@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background-color: #111;
+    background: linear-gradient(210deg, rgba(0, 0, 0, 0.9) 75%, rgba(255, 40, 40, 0.9) 100%);
     color: wheat;
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
@@ -225,7 +225,7 @@ body {
 .copyright { 
     grid-area: copyright; 
     font-size: 0.9rem; 
-    color: #bfa; 
+    color: rgba(255, 40, 40, 0.70); 
 }
 .copyright {
     display: flex;
@@ -346,9 +346,10 @@ body {
     border-radius: 0 0 16px 16px;
 }
 
+
 /* Add background after scrolling past hero */
 .topbar.scrolled {
-    background: black;
+    background: linear-gradient(90deg, #1e1e1e 60%, #f5deb3 100%);
     animation: navFadeIn 1s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -500,7 +501,7 @@ nav ul li a:focus::before {
         top: 0;
         left: 0;
         width: 100vw;
-        background: black;
+        background: transparent;
         z-index: 2000;
         display: flex;
         align-items: center;
