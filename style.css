@@ -19,7 +19,19 @@ body {
         "links about about copyright";
     gap: 1.5rem;
     padding: 0;
-    padding-top: 5.5rem; /* Add space for fixed topbar */
+    padding-top: 5.5rem; 
+}
+
+/* Fade-in animation for bentos */
+.bento-fade {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    will-change: opacity, transform;
+}
+.bento-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Hero Section */
@@ -40,12 +52,46 @@ body {
     padding: 2rem;
 }
 .hero h1 {
-    font-size: 2.5rem;
+    font-size: 8rem;
     margin: 0 0 1rem 0;
     color: wheat;
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    background: linear-gradient(
+        90deg,
+        #000 30%,
+        #fff 40%,
+        #ff2828 50%,
+        #fff 60%,
+        #000 70%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientShift 10s linear infinite;
+    pointer-events: none;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    text-align: center;
+    display: block;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+    0% { background-position: 0% 50%; }
 }
 .hero p {
-    font-size: 1.2rem;
+    font-size: 2.4rem;
     color: #f5deb3;
     margin: 0;
 }
@@ -327,8 +373,7 @@ body {
     animation: textFadeIn 0.7s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* Topbar: fixed logo + nav, transparent background by default */
-/* ...existing code... */
+
 .topbar {
     position: fixed;
     top: 0;
@@ -339,7 +384,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 1.2rem 2.5rem;
-    background: black; /* Transparent until scrolled */
+    background: black;
     opacity: 1;
     transition: background 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.7s cubic-bezier(0.4,0,0.2,1);
     box-shadow: 0 2px 16px rgba(0,0,0,0.18);
@@ -501,12 +546,19 @@ nav ul li a:focus::before {
         top: 0;
         left: 0;
         width: 100vw;
-        background: transparent;
+        background: black;
         z-index: 2000;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 1rem 1.5rem;
+    }
+    .hero h1 {
+        font-size: 6rem;
+    }
+    .hero p {
+        font-size: 1.8rem;
+        color: rgba(231, 231, 231, 0.7);
     }
     .logo {
         z-index: 2100;
@@ -544,9 +596,14 @@ nav ul li a:focus::before {
     nav ul li {
         margin-left: 2rem;
     }
+    .instagram-embed {
+        height: 300px;
+        min-height: 300px;
+    }
 }
 @media (max-width: 600px) {
     body {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 75%, rgba(255, 40, 40, 0.9) 100%);
         grid-template-columns: 1fr;
         grid-template-areas:
             "hero"
@@ -574,6 +631,13 @@ nav ul li a:focus::before {
     }
     .hero { 
         margin-top: 0; 
+    }
+    .hero h1 {
+        font-size: 4rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        color: rgba(231, 231, 231, 0.7);
     }
 }
 @media (max-width: 900px) {
