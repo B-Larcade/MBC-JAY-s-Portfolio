@@ -500,7 +500,7 @@ nav ul li a:focus::before {
         top: 0;
         left: 0;
         width: 100vw;
-        background: transparent;
+        background: black;
         z-index: 2000;
         display: flex;
         align-items: center;
