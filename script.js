@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger');
     const navList = document.getElementById('nav-list');
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.querySelector('.press-toggle');
     const content = document.querySelector('.press-content');
@@ -31,4 +29,20 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.textContent = expanded ? 'Show less' : 'Read more';
         btn.setAttribute('aria-expanded', expanded);
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const bentos = document.querySelectorAll('.bento-fade');
+    const revealOnScroll = () => {
+        bentos.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 60 && rect.bottom > 60) {
+                el.classList.add('visible');
+            } else {
+                el.classList.remove('visible');
+            }
+        });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); 
 });
